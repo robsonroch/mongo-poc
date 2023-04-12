@@ -1,0 +1,10 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://mongodb:27017/test
+      username: root
+      password: example
+  mvc:
+    pathmatch:
+      matching-strategy: ant-path-matcher    
+  
