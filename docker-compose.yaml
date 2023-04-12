@@ -1,0 +1,30 @@
+version: '3.9'
+services:
+  mongodb:
+    image: mongo:4.4
+    container_name: mongodb-poc
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    volumes:
+      - mongodb-data:/data/db
+    ports:
+      - "27017:27017"
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongo localhost:27017/test --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 3
+  api:
+    build: .
+    container_name: api-mongo-poc
+    restart: always
+    ports:
+      - "8090:8080"
+    depends_on:
+      - mongodb
+    volumes:
+      - ./logs:/app/logs
+volumes:
+  mongodb-data:
