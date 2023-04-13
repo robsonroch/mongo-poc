@@ -15,7 +15,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Cliente'
+                  $ref: '#/components/schemas/ClienteResponse'
     post:
       summary: Cria um novo cliente
       requestBody:
@@ -23,14 +23,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Cliente'
+              $ref: '#/components/schemas/ClienteRequest'
       responses:
         '201':
           description: Cliente criado com sucesso
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Cliente'
+                $ref: '#/components/schemas/ClienteResponse'
 
   /clientes/{id}:
     get:
@@ -48,7 +48,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Cliente'
+                $ref: '#/components/schemas/ClienteResponse'
         '404':
           description: Cliente não encontrado
     put:
@@ -65,14 +65,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Cliente'
+              $ref: '#/components/schemas/ClienteRequest'
       responses:
         '200':
           description: Cliente atualizado com sucesso
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Cliente'
+                $ref: '#/components/schemas/ClienteResponse'
         '404':
           description: Cliente não encontrado
     delete:
@@ -92,7 +92,7 @@ paths:
 
 components:
   schemas:
-    Endereco:
+    EnderecoRequest:
       type: object
       properties:
         logradouro:
@@ -107,8 +107,10 @@ components:
           type: string
         complemento:
           type: string
+        principal:
+          type: boolean  
 
-    Telefone:
+    TelefoneRequest:
       type: object
       properties:
         ddd:
@@ -121,7 +123,7 @@ components:
         principal:
           type: boolean
 
-    Cliente:
+    ClienteRequest:
       type: object
       properties:
         id:
@@ -140,6 +142,27 @@ components:
         enderecos:
           type: array
           items:
-            $ref: '#/components/schemas/Endereco'
+            $ref: '#/components/schemas/EnderecoRequest'
         telefones:
           type: array
+          items:
+            $ref: '#/components/schemas/TelefoneRequest'
+
+    ClienteResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        nome:
+          type: string
+        sobrenome:
+          type: string
+        email:
+          type: string
+        sexo:
+          type: string
+          enum: ['masculino', 'feminino']
+        datanascimento:
+          type: string
+        
+            
