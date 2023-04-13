@@ -1,9 +1,10 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://mongodb:27017/test
-      username: root
-      password: example 
+      uri: mongodb://root:rootpassword@mongodb:27017/api?directConnection=true&authSource=admin
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
   mvc:
     pathmatch:
       matching-strategy: ant-path-matcher    

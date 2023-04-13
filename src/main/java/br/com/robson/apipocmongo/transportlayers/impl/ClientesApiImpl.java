@@ -32,6 +32,7 @@ public class ClientesApiImpl implements ClientesApi{
 		
 		Cliente toSave = ClienteRequestMapper.INSTANCE.map(clienteRequest);
 		
+		toSave.setId(null);
 		return ResponseEntity.ok(clienteUseCase.save(toSave));
 		
 	}

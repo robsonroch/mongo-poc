@@ -9,6 +9,7 @@ import org.mapstruct.factory.Mappers;
 
 import br.com.robson.apipocmongo.entities.Cliente;
 import br.com.robson.apipocmongo.transportlayers.openapi.model.ClienteRequest;
+import lombok.extern.slf4j.Slf4j;
 
 @Mapper
 public interface ClienteRequestMapper {
@@ -18,8 +19,10 @@ public interface ClienteRequestMapper {
 	Cliente map(ClienteRequest request);
 	
     default LocalDate mapDate(String value) {
-        if (value == null) return null;
-        return LocalDate.parse(value, DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+        if (value == null) return null;        
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate parser = LocalDate.parse(value, formatter);
+        return parser;
     }
 
     default LocalDateTime mapTime(String value) {
