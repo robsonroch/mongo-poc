@@ -17,7 +17,9 @@ services:
       timeout: 5s
       retries: 3
   api:
-    build: .
+    build: 
+      context: .
+      dockerfile: DockerfileJar
     container_name: api-mongo-poc
     restart: always
     ports:
