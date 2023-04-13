@@ -1,9 +1,7 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://localhost:27017/test
-      username: root
-      password: example
+      uri: mongodb://root:rootpassword@localhost:27017/api
   mvc:
     pathmatch:
       matching-strategy: ant-path-matcher    

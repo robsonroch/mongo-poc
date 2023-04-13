@@ -12,34 +12,24 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration;
 
-@Slf4j
-@Configuration
-public class MongoConfig extends AbstractMongoClientConfiguration {
-
-    @Value("${spring.data.mongodb.uri}")
-    private String mongoUri;
-
-    @Value("${spring.data.mongodb.username}")
-    private String mongoUsername;
-
-    @Value("${spring.data.mongodb.password}")
-    private String mongoPassword;
-
-    @Override
-    protected String getDatabaseName() {
-        return "test";
-    }
-
-    @Bean
-    @Override
-    public MongoClient mongoClient() {
-        ConnectionString connectionString = new ConnectionString(mongoUri);
-        MongoClientSettings mongoClientSettings = MongoClientSettings.builder()
-                .applyConnectionString(connectionString)
-                .build();
-        MongoClient client = MongoClients.create(mongoClientSettings);
-        log.info("MongoClient criado com sucesso.");
-        return client;
-    }
-    
-}
+/*
+ * @Slf4j
+ * 
+ * @Configuration public class MongoConfig extends
+ * AbstractMongoClientConfiguration {
+ * 
+ * @Value("${spring.data.mongodb.uri}") private String mongoUri;
+ * 
+ * @Override protected String getDatabaseName() { return "api"; }
+ * 
+ * @Bean
+ * 
+ * @Override public MongoClient mongoClient() { ConnectionString
+ * connectionString = new ConnectionString(mongoUri); MongoClientSettings
+ * mongoClientSettings = MongoClientSettings.builder()
+ * .applyConnectionString(connectionString) .build(); MongoClient client =
+ * MongoClients.create(mongoClientSettings);
+ * log.info("MongoClient criado com sucesso."); return client; }
+ * 
+ * }
+ */
