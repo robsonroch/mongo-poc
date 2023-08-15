@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.index.Indexed;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,6 +25,7 @@ public class Cliente {
     private String id;
     private String nome;
     private String sobrenome;
+    @Indexed(unique = true)
     private String email;
     private String sexo;
     private LocalDate datanascimento;

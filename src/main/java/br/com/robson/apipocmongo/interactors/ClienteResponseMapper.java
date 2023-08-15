@@ -3,11 +3,13 @@ package br.com.robson.apipocmongo.interactors;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
 import br.com.robson.apipocmongo.entities.Cliente;
+
 import br.com.robson.apipocmongo.transportlayers.openapi.model.ClienteResponse;
 
 @Mapper
@@ -16,6 +18,8 @@ public interface ClienteResponseMapper {
 	ClienteResponseMapper INSTANCE = Mappers.getMapper(ClienteResponseMapper.class);
 	
 	ClienteResponse map(Cliente entity);
+	
+	List<ClienteResponse> map(List<Cliente> map);
 	
     default LocalDate mapDate(String value) {
         if (value == null) return null;

@@ -1,7 +1,7 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://root:rootpassword@localhost:27017/api
+      uri: mongodb://root:rootpassword@localhost:27017/api?directConnection=true&authSource=admin
   mvc:
     pathmatch:
       matching-strategy: ant-path-matcher    
