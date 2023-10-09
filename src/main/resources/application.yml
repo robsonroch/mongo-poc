@@ -2,4 +2,11 @@ spring:
   profiles:
     active: debug      
  
-  
+onboarding:
+  sistema:
+    - description: MOTO
+      code: 5
+    - description: AUTO
+      code: 10
+    - description: CICLO
+      code: 15

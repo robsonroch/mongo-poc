@@ -101,7 +101,56 @@ paths:
           description: Cliente deletado com sucesso
         '404':
           description: Cliente não encontrado
-
+          
+  /resiliencia/retry{attempts}:    
+    get:
+      summary: Testa quantidade de tentativas, erra quanto request < attempts
+      operationId: getTestRetry
+      parameters:
+        - in: path
+          name: attempts
+          required: true
+          description: attempts numero de tentativas
+          schema:
+            type: int
+      responses:
+        '200':
+          description: Descrição da chamada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+        default:
+          description: Description default
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralError'
+                
+  /resiliencia/exceptions{statusCodeErro}:    
+    get:
+      summary: Testa o tipo de erro para usar na resiliencia do client
+      operationId: getTestErroByStatus
+      parameters:
+        - in: path
+          name: statusCodeErro
+          required: true
+          description: statusCodeErro um número inteiro correspondete ao status code
+          schema:
+            type: int
+      responses:
+        '200':
+          description: Descrição da resposta
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+        default:
+          description: Description default
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralError'                
 components:
   schemas:
     GeneralError:
@@ -115,6 +164,17 @@ components:
         timestamp:
           type: string
           format: date-time  
+          
+    GenericResponse:
+      type: object
+      properties:
+        description:
+          type: string
+        message:
+          type: string
+        timestamp:
+          type: string
+          format: date-time            
           
     EnderecoRequest:
       type: object
@@ -187,6 +247,18 @@ components:
           type: string
           enum: ['masculino', 'feminino']
         datanascimento:
-          type: string       
+          type: string    
+             
+    ResilienteResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        nome:
+          type: string
+        timestamp:
+          type: string
+          format: date-time   
+          
 
             
