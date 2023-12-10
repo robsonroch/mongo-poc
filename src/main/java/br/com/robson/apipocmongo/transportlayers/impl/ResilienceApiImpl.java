@@ -14,14 +14,18 @@ import br.com.robson.apipocmongo.transportlayers.openapi.api.ResilienciaApi;
 import br.com.robson.apipocmongo.transportlayers.openapi.model.ClienteResponse;
 import br.com.robson.apipocmongo.transportlayers.openapi.model.GenericResponse;
 import io.swagger.annotations.ApiParam;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping
+@Slf4j
 public class ResilienceApiImpl implements ResilienciaApi {
 	
 	private static Integer count = 0;
 
     public ResponseEntity<GenericResponse> getTestErroByStatus(@PathVariable("statusCodeErro") Integer statusCodeErro) {
+
+    	log.info("teste erro para o estatus {}", statusCodeErro );
     	
     	return ResponseEntity.status(HttpStatus.valueOf(statusCodeErro)).build();
     	

@@ -1,6 +1,11 @@
 spring:
   profiles:
-    active: debug      
+    active: debug  
+  application:
+    name: mongo-poc
+  sleuth:
+    sampler:
+      probability: 1.0  
  
 onboarding:
   sistema:

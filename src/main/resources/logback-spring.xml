@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+    <springProperty scope="context" name="springAppName" source="spring.application.name"/>
+    
+    <conversionRule conversionWord="stack" converterClass="net.logstash.logback.stacktrace.ShortenedThrowableConverter" />
+    
+    <springProfile name="flatlog">
+    	<include resource="org/springframework/boot/logging/logback/console-appender.xml" />
+    </springProfile>
+
+	<springProfile name="!flatlog">
+	    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+	        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+	        	<providers>
+	        		<timestamp>
+	        			<fieldName>
+	        				app-timestamp
+	        			</fieldName>
+	        		</timestamp>
+	        	
+	        	<pattern>
+	        		<pattern>
+	        			{
+	        				"app-severity": "%level",
+	        				"app-service": "${springAppName:-}",
+	        				"app-trace": "%X{traceId:-}",
+	        				"app-span": "${spanId:-}",
+	        				"app-correlation": "%X{correlationId:-}",
+	        				"app-class": "%logger{40}",
+	        				"app-msg": "%message",
+	        				"app-clientes": "%X{jsonStringClientes:-}"
+	        			}
+	        		</pattern>
+	        	</pattern>
+	        	</providers>
+	        	<!-- <jsonGeneratorDecorator class="net.logstash.logback.decorate.PrettyPrintingJsonGeneratorDecorator"/> -->
+	        </encoder>
+	    </appender>
+    </springProfile>
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>
